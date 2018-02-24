@@ -40,18 +40,16 @@ class Form extends Component {
       endYear: this.state.endYear
     }
 
+    //call search API
     API.searchNews(searchParams)
     .then((results) => {
-      console.log(results)
-      
+      console.log("Success")
       //reset the query text field only...assuming user may search again in same year range
       this.setState({
         searchCriteria: ""
       });
-
     })
     .catch((err) => console.log(err));
-
   };
 
   render() {
@@ -66,7 +64,7 @@ class Form extends Component {
             placeholder="Search the news..."
             required="required"
           />
-          <div class="input-field col s6">
+          <div className="input-field col s6">
             <input
               value={this.state.startYear}
               name="startYear"
@@ -74,9 +72,9 @@ class Form extends Component {
               type="number"
               placeholder="Start Year"
             />
-            <label for="startYear">Start Year</label>
+            <label htmlFor="startYear">Start Year</label>
           </div>
-          <div class="input-field col s6">
+          <div className="input-field col s6">
             <input
               value={this.state.endYear}
               name="endYear"
@@ -84,7 +82,7 @@ class Form extends Component {
               type="number"
               placeholder="Start Year"
             />
-            <label for="endYear">End Year</label>
+            <label htmlFor="endYear">End Year</label>
           </div>
           <Button title="Get News" className="btn waves-effect waves-light orange darken-2" onClick={this.handleFormSubmit}>Search</Button>
         </form>

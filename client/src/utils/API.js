@@ -19,5 +19,5 @@ export default {
   // }
 
   //call news api based on search criteria
-  searchNews: (searchParams) => axios.get("/api/search", searchParams)
+  searchNews: (searchParams) => axios.post("/api/search", searchParams)
 };

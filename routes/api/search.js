@@ -1,32 +1,39 @@
 const router = require("express").Router();
+const NYT = require('nyt');
 // const booksController = require("../../controllers/searchController");
 require('dotenv').config();
 
 //nyt api key for query
-const apiKey = process.env.nytApiKey;
+var keys = {
+  'article-search': process.env.nytApiKey
+}
 
-// Matches with "/api/search"
-router.route("/")
-  .get({
-    url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
-    qs: {
-      'api-key': apiKey,
-      'q': "trump",
-      'begin_date': "20180101",
-      'end_date': "20181231"
-    },
-  }, (err, res, body) => {
+function requestNYT(params, callback) {
 
-    console.log("HITTING IT IN THE SEARCH!\n")
-    if (err) {
-        console.log("ERROR OCCURRED")
-        console.log(err);
-        res.status(404).json({msg: "error occurred", err: err})
-    }
-    body = JSON.parse(body);
-    console.log(body);
+  //instantiate new NYT object
+  const nyt = new NYT(keys);
 
-    res.json(body)
+  //FORMAT YYYYMMDD --> beginning/end of chosen year
+  const beginDate = params.startYear + "0101"
+  const endDate = params.endYear + "1231"
+
+  //search NYT based on user criteria
+  nyt.article.search({
+    'query': params.queryText,
+    'begin_date': beginDate,
+    'end_date': endDate,
+    'sort': 'newest',
+    'fl': 'web_url, snippet, headline, pub_date, _id',
+    'page': 0
+  }, (searchResults) => callback(searchResults));
+}
+
+router.post("/", (req, res) => {
+  //passing in the search params to the nyt search function
+  //wait for search to callback before sending res to client
+  requestNYT(req.body, (searchResults) => {
+    res.json(searchResults);
   });
+})
 
 module.exports = router;
