@@ -16,14 +16,14 @@ function requestNYT(params, callback) {
   //FORMAT YYYYMMDD --> beginning/end of chosen year
   const beginDate = params.startYear + "0101"
   const endDate = params.endYear + "1231"
-
+  
   //search NYT based on user criteria
   nyt.article.search({
     'query': params.queryText,
     'begin_date': beginDate,
     'end_date': endDate,
     'sort': 'newest',
-    'fl': 'web_url, snippet, headline, pub_date, _id',
+    'fl': 'web_url, snippet, headline, multimedia, _id',
     'page': 0
   }, (searchResults) => callback(searchResults));
 }
