@@ -67,7 +67,7 @@ class Home extends Component {
             //set first 5 results array elements to state
             this.setState({searchResults: results.response.docs.slice(0,6)});
 
-            console.log(this.state.searchResults);
+            console.log(this.state.searchResults); 
          
             //reset the query text field only...assuming user may search again in same year range
             this.setState({
