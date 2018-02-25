@@ -1,6 +1,6 @@
 import React from "react";
 
-const ArticleCard = (props) =>
+const SavedCard = (props) =>
 
   <div>
     <div className="col s12 m12 l6 xl6">
@@ -14,12 +14,12 @@ const ArticleCard = (props) =>
         </div>
         <div className="card-action">
           <a href={props.url} target="on_blank">Read Full Article</a>
-          <a className="btn-floating btn-medium waves-effect waves-light orange right save-article" onClick={() => props.saveclick(props)}>
-            <i className="material-icons">grade</i>
+          <a className="btn-floating btn-medium waves-effect waves-light red right delete-article" onClick={() => props.deleteclick(props.id)}>
+            <i className="material-icons">delete</i>
           </a>
         </div>
       </div>
     </div>
   </div>;
 
-export default ArticleCard;
+export default SavedCard;

@@ -1,7 +1,7 @@
 import React from "react";
 
 const Button = (props) =>
-  <button {...props} style={{ float: "right", marginBottom: 10 }} className={props.className}>
+  <button {...props} className={props.className}>
     {props.children}
   </button>;
 

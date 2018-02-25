@@ -1,23 +1,16 @@
 import axios from "axios";
 
 export default {
-  // Gets all books
-  // getBooks: function() {
-  //   return axios.get("/api/books");
-  // },
-  // // Gets the book with the given id
-  // getBook: function(id) {
-  //   return axios.get("/api/books/" + id);
-  // },
-  // // Deletes the book with the given id
-  // deleteBook: function(id) {
-  //   return axios.delete("/api/books/" + id);
-  // },
-  // // Saves a book to the database
-  // saveBook: function(bookData) {
-  //   return axios.post("/api/books", bookData);
-  // }
 
   //call news api based on search criteria
-  searchNews: (searchParams) => axios.post("/api/search", searchParams)
+  searchNews: (searchParams) => axios.post("/api/search", searchParams),
+  
+  //call news api based on search criteria
+  getSavedArticles: () => axios.get("/api/article"),
+
+  //save new article
+  saveArticle: (articleParams) => axios.post("/api/article", articleParams),
+  
+  //save new article
+  deleteArticle: (articleId) => axios.delete("/api/article/" + articleId)
 };
